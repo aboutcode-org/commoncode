@@ -16,7 +16,7 @@ import sys
 from setuptools import find_packages
 from setuptools import setup
 
-version = '0.0.0'
+version = '0.0.1'
 
 #### Small hack to force using a plain version number if the option
 #### --plain-version is passed to setup.py
@@ -92,7 +92,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='',
+    name='commoncode',
     version=get_version(),
     license='Apache-2.0',
     description='',
@@ -120,5 +120,13 @@ setup(
     keywords=[
     ],
     install_requires=[
+        # commoncode
+        'backports.os == 0.1.1; python_version < "3"',
+        'future >= 0.16.0',
+        'text_unidecode >= 1.0, < 2.0',
+        'saneyaml',
+        'Beautifulsoup4 >= 4.0.0, <5.0.0',
+        'click >= 6.0.0',
+        'intbitset >= 2.3.0,  < 3.0',
     ]
 )
