@@ -18,7 +18,7 @@ fi
 
 
 if [[ "$PYTHON_EXE" == "" ]]; then
-    PYTHON_EXE=python3
+    PYTHON_EXE=python
 fi
 
 
