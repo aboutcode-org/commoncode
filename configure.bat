@@ -1,6 +1,7 @@
 @echo OFF
 @setlocal
-@rem Copyright (c) nexB Inc. http://www.nexb.com/ - All rights reserved.
+@rem Copyright (c) nexB Inc. and others.
+@rem SPDX-License-Identifier: Apache-2.0
 
 @rem ################################
 @rem # A configuration script for Windows
