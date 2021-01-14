@@ -1,8 +1,18 @@
+# See https://config.travis-ci.com/ for a full list of configuration options.
+
+os: linux
+
+dist: xenial
+
 language: python
 python:
   - "2.7"
   - "3.6"
+  - "3.7"
+  - "3.8"
+
 install:
   - ./configure
+
 script:
   - tmp/bin/pytest
