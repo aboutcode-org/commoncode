@@ -10,8 +10,8 @@ python:
   - "3.7"
   - "3.8"
 
-install:
-  - ./configure
+# Scripts to run at install stage
+install: ./configure
 
-script:
-  - tmp/bin/pytest
+# Scripts to run at script stage
+script: tmp/bin/pytest
