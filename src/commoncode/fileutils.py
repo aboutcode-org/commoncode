@@ -62,6 +62,15 @@ if TRACE:
     def logger_debug(*args):
         return logger.debug(' '.join(isinstance(a, str) and a or repr(a) for a in args))
 
+PATH_TYPE = str
+POSIX_PATH_SEP = '/'
+WIN_PATH_SEP = '\\'
+EMPTY_STRING = ''
+DOT = '.'
+PATH_SEP = os.sep
+PATH_ENV_VAR = 'PATH'
+PATH_ENV_SEP = os.pathsep
+
 """
 File, paths and directory utility functions.
 """
