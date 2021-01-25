@@ -999,3 +999,59 @@ class TestParentDir(FileBasedTesting):
         result = fileutils.parent_directory((os.path.join(test_dir, test_file)))
         result = fileutils.as_posixpath(result)
         assert result.endswith(expected_name)
+
+class TestFileUtilsBase(FileBasedTesting):
+
+    def test_PATH_TYPE(self):
+        try:
+            from commoncode.fileutils import PATH_TYPE
+        except ImportError:
+            self.fail("Can't import PATH_TYPE")
+
+    def test_POSIX_PATH_SEP(self):
+        try:
+            from commoncode.fileutils import POSIX_PATH_SEP
+        except ImportError:
+            self.fail("Can't import POSIX_PATH_SEP")
+
+    def test_WIN_PATH_SEP(self):
+        try:
+            from commoncode.fileutils import WIN_PATH_SEP
+        except ImportError:
+            self.fail("Can't import WIN_PATH_SEP")
+
+    def test_EMPTY_STRING(self):
+        try:
+            from commoncode.fileutils import EMPTY_STRING
+        except ImportError:
+            self.fail("Can't import EMPTY_STRING")
+
+    def test_DOT(self):
+        try:
+            from commoncode.fileutils import DOT
+        except ImportError:
+            self.fail("Can't import DOT")
+
+    def test_DOT(self):
+        try:
+            from commoncode.fileutils import DOT
+        except ImportError:
+            self.fail("Can't import DOT")
+
+    def test_PATH_SEP(self):
+        try:
+            from commoncode.fileutils import PATH_SEP
+        except ImportError:
+            self.fail("Can't import PATH_SEP")
+
+    def test_PATH_ENV_VAR(self):
+        try:
+            from commoncode.fileutils import PATH_ENV_VAR
+        except ImportError:
+            self.fail("Can't import PATH_ENV_VAR")
+
+    def test_PATH_ENV_SEP(self):
+        try:
+            from commoncode.fileutils import PATH_ENV_SEP
+        except ImportError:
+            self.fail("Can't import PATH_ENV_SEP")
