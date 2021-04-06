@@ -1323,6 +1323,14 @@ class TestVirtualCodebaseCreation(FileBasedTesting):
         ]
         assert expected == results
 
+    def test_VirtualCodebase_account_fingerprint_attribute(self):
+        test_file = self.get_test_loc("resource/virtual_codebase/fingerprint_attribute.json")
+        codebase = VirtualCodebase(test_file)
+        resources_fingerprint = [resource.fingerprint for resource in codebase.walk()]
+        assert "e30cf09443e7878dfed3288886e97542" in resources_fingerprint
+        assert None in resources_fingerprint
+        assert resources_fingerprint.count(None) == 2
+
 
 class TestResource(FileBasedTesting):
     test_data_dir = join(dirname(__file__), 'data')

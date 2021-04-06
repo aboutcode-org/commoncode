@@ -1015,6 +1015,9 @@ class Resource(object):
     # external data to serialize
     size = attr.ib(default=0, type=int, repr=TRACE)
 
+    # fingerprint attribute of the file it may be an optional attribute
+    fingerprint = attr.ib(default=None)
+
     # These attributes are re/computed for directories and files with children
     # they represent are the for the full descendants of a Resource
     size_count = attr.ib(default=0, type=int, repr=False)

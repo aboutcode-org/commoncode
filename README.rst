@@ -13,7 +13,7 @@ Visit https://aboutcode.org and https://github.com/nexB/ for support and downloa
 
 To install this package use::
 
-    pip install commoncode]
+    pip install commoncode
 
 
 To set up the development environment::
