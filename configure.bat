@@ -24,8 +24,8 @@
 @rem ################################
 
 @rem # Requirement arguments passed to pip and used by default or with --dev.
-set "REQUIREMENTS=--editable ."
-set "DEV_REQUIREMENTS=--editable .[testing]"
+set "REQUIREMENTS=--editable . --constraint requirements.txt"
+set "DEV_REQUIREMENTS=--editable .[testing]  --constraint requirements.txt"
 
 @rem # where we create a virtualenv
 set "VIRTUALENV_DIR=tmp"
