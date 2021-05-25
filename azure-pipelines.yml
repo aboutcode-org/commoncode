@@ -62,3 +62,39 @@ jobs:
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
               all: tmp\Scripts\pytest -n 2 -vvs
+
+
+################################################################################
+# Test using a plain pip install to get the latest of all wheels
+################################################################################
+
+
+    - template: etc/ci/azure-posix.yml
+      parameters:
+          job_name: ubuntu20_cpython_latest_from_pip
+          image_name: ubuntu-20.04
+          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          test_suites:
+              all:
+                 - tmp/bin/pip --force-reinstall --upgrade -e .
+                 - tmp/bin/pytest -n 2 -vvs
+
+    - template: etc/ci/azure-win.yml
+      parameters:
+          job_name: win2019_cpython_latest_from_pip
+          image_name: windows-2019
+          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          test_suites:
+              all:
+                 - tmp\Scripts\pip --force-reinstall --upgrade -e .
+                 - tmp\Scripts\pytest -n 2 -vvs
+
+    - template: etc/ci/azure-posix.yml
+      parameters:
+          job_name: macos1015_cpython_latest_from_pip
+          image_name: macos-10.15
+          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          test_suites:
+              all:
+                 - tmp/bin/pip --force-reinstall --upgrade -e .
+                 - tmp/bin/pytest -n 2 -vvs
