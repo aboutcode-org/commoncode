@@ -12,7 +12,7 @@ jobs:
           image_name: ubuntu-16.04
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pytest -vvs
+              all: venv/bin/pytest -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -20,7 +20,7 @@ jobs:
           image_name: ubuntu-18.04
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -28,7 +28,7 @@ jobs:
           image_name: ubuntu-20.04
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -36,7 +36,7 @@ jobs:
           image_name: macos-10.14
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -44,7 +44,7 @@ jobs:
           image_name: macos-10.15
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs
 
     - template: etc/ci/azure-win.yml
       parameters:
@@ -52,7 +52,7 @@ jobs:
           image_name: vs2017-win2016
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pytest -n 2 -vvs
 
     - template: etc/ci/azure-win.yml
       parameters:
@@ -60,7 +60,7 @@ jobs:
           image_name: windows-2019
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pytest -n 2 -vvs
 
 
 ################################################################################
@@ -74,7 +74,7 @@ jobs:
           image_name: ubuntu-20.04
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              click_versions: for clk_ver in 8.0.1 7.1.2 7.1.1 7.1 6.7; do pip install click==$clk_ver; tmp/bin/pytest -vvs tests/test_cliutils_progressbar.py; done
+              click_versions: for clk_ver in 8.0.1 7.1.2 7.1.1 7.1 6.7; do pip install click==$clk_ver; venv/bin/pytest -vvs tests/test_cliutils_progressbar.py; done
 
 
 ################################################################################
@@ -88,7 +88,7 @@ jobs:
           image_name: ubuntu-20.04
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pip install --force-reinstall --upgrade -e . && tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pip install --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
 
     - template: etc/ci/azure-win.yml
       parameters:
@@ -96,7 +96,7 @@ jobs:
           image_name: windows-2019
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp\Scripts\pip install --force-reinstall --upgrade -e . &&  tmp\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pip install --force-reinstall --upgrade -e . &&  venv\Scripts\pytest -n 2 -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -104,4 +104,4 @@ jobs:
           image_name: macos-10.15
           python_versions: ['3.6', '3.7', '3.8', '3.9']
           test_suites:
-              all: tmp/bin/pip install --force-reinstall --upgrade -e . && tmp/bin/pytest -n 2 -vvs
+              all: venv/bin/pip install --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
