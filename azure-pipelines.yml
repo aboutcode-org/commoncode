@@ -64,6 +64,20 @@ jobs:
 
 
 ################################################################################
+# Test using many version of Click to work around regressions in API
+################################################################################
+
+
+    - template: etc/ci/azure-posix.yml
+      parameters:
+          job_name: ubuntu20_test_all_supported_click_versions
+          image_name: ubuntu-20.04
+          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          test_suites:
+              click_versions: for clk_ver in 8.0.1 7.1.2 7.1.1 7.1 6.7; do pip install click==$clk_ver; tmp/bin/pytest -vvs tests/test_cliutils_progressbar.py; done
+
+
+################################################################################
 # Test using a plain pip install to get the latest of all wheels
 ################################################################################
 
