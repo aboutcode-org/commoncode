@@ -1995,6 +1995,12 @@ class VirtualCodebase(Codebase):
             if not name:
                 name = file_name(path)
 
+            extension = fdata.get('extension', None) or None
+            if extension:
+                if not name.endswith(extension):
+                    # Ensure the filename also contains the extension
+                    name = f'{name}{extension}'
+
             is_file = fdata.get('type', 'file') == 'file'
 
             parent = self._get_parent_directory(path_segments=path_segments)

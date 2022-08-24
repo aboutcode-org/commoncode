@@ -1527,3 +1527,18 @@ class TestResource(FileBasedTesting):
         ]
 
         assert results == expected
+
+    def test_virtualcode_creation_resource_name_no_extension(self):
+        test_file = self.get_test_loc('resource/virtual_codebase/no_extensions_in_names.json')
+        codebase = VirtualCodebase(location=test_file)
+        results = [r.path for r in codebase.walk(topdown=True)]
+
+        expected = [
+            'virtual_root',
+            'virtual_root/test.tar.gz',
+            'virtual_root/test.tar.gz-extract',
+            'virtual_root/test.tar.gz-extract/test',
+            'virtual_root/test.tar.gz-extract/test/foo',
+        ]
+
+        assert results == expected
