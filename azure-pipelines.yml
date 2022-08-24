@@ -1,3 +1,4 @@
+
 ################################################################################
 # We use Azure to run the full tests suites on multiple Python 3.x
 # on multiple Windows, macOS and Linux versions all on 64 bits
@@ -6,11 +7,15 @@
 
 jobs:
 
+################################################################################
+# These jobs are using VMs and Azure-provided Pythons 3.8
+################################################################################
+
     - template: etc/ci/azure-posix.yml
       parameters:
           job_name: ubuntu18_cpython
           image_name: ubuntu-18.04
-          python_versions: ['3.6', '3.7', '3.8', '3.9', '3.10']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
               all: venv/bin/pytest -n 2 -vvs
 
@@ -18,7 +23,15 @@ jobs:
       parameters:
           job_name: ubuntu20_cpython
           image_name: ubuntu-20.04
-          python_versions: ['3.6', '3.7', '3.8', '3.9', '3.10']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
+          test_suites:
+              all: venv/bin/pytest -n 2 -vvs
+
+    - template: etc/ci/azure-posix.yml
+      parameters:
+          job_name: ubuntu22_cpython
+          image_name: ubuntu-22.04
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
               all: venv/bin/pytest -n 2 -vvs
 
@@ -26,7 +39,7 @@ jobs:
       parameters:
           job_name: macos1015_cpython
           image_name: macos-10.15
-          python_versions: ['3.6', '3.7', '3.8', '3.9', '3.10']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
               all: venv/bin/pytest -n 2 -vvs
 
@@ -38,11 +51,19 @@ jobs:
           test_suites:
               all: venv/bin/pytest -n 2 -vvs
 
+    - template: etc/ci/azure-posix.yml
+      parameters:
+          job_name: macos12_cpython
+          image_name: macos-12
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
+          test_suites:
+              all: venv/bin/pytest -n 2 -vvs
+
     - template: etc/ci/azure-win.yml
       parameters:
           job_name: win2019_cpython
           image_name: windows-2019
-          python_versions: ['3.6', '3.7', '3.8', '3.9', '3.10']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
               all: venv\Scripts\pytest -n 2 -vvs
 
@@ -64,13 +85,18 @@ jobs:
       parameters:
           job_name: ubuntu20_test_all_supported_click_versions
           image_name: ubuntu-20.04
-          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
-              click_versions: for clk_ver in 8.0.1 7.1.2 7.1.1 7.1 6.7; do pip install click==$clk_ver; venv/bin/pytest -vvs tests/test_cliutils_progressbar.py; done
+              click_versions: |
+                for clk_ver in 8.1.3 8.1.2 8.1.1 8.1.0 8.0.4 8.0.2 8.0.3 8.0.1 7.1.2 7.1.1 7.1 6.7;
+                  do
+                    pip install click==$clk_ver;
+                    venv/bin/pytest -vvs tests/test_cliutils_progressbar.py;
+                  done
 
 
 ################################################################################
-# Test using a plain pip install to get the latest of all wheels
+# Tests using a plain pip install to get the latest of all wheels
 ################################################################################
 
 
@@ -78,22 +104,23 @@ jobs:
       parameters:
           job_name: ubuntu20_cpython_latest_from_pip
           image_name: ubuntu-20.04
-          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
-              all: venv/bin/pip install --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
+              all: venv/bin/pip install --upgrade-strategy eager --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
+
 
     - template: etc/ci/azure-win.yml
       parameters:
           job_name: win2019_cpython_latest_from_pip
           image_name: windows-2019
-          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
-              all: venv\Scripts\pip install --force-reinstall --upgrade -e . &&  venv\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pip install --upgrade-strategy eager --force-reinstall --upgrade -e . &&  venv\Scripts\pytest -n 2 -vvs
 
     - template: etc/ci/azure-posix.yml
       parameters:
-          job_name: macos1015_cpython_latest_from_pip
-          image_name: macos-10.15
-          python_versions: ['3.6', '3.7', '3.8', '3.9']
+          job_name: macos11_cpython_latest_from_pip
+          image_name: macos-11
+          python_versions: ['3.7', '3.8', '3.9', '3.10']
           test_suites:
-              all: venv/bin/pip install --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
+              all: venv/bin/pip install --upgrade-strategy eager --force-reinstall --upgrade -e . && venv/bin/pytest -n 2 -vvs
