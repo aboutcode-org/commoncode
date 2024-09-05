@@ -84,9 +84,10 @@ jobs:
       image_name: ubuntu-20.04
       python_versions: ["3.8", "3.9", "3.10", "3.11"]
       test_suites:
-        all:
-          venv/bin/pip install --upgrade-strategy eager --force-reinstall
-          --upgrade -e . && venv/bin/pytest -n 2 -vvs
+        all: |
+          venv/bin/pip install --upgrade-strategy eager --force-reinstall --upgrade -e .
+          venv/bin/pip freeze
+          venv/bin/pytest -n 2 -vvs
 
   - template: etc/ci/azure-win.yml
     parameters:
@@ -94,6 +95,7 @@ jobs:
       image_name: windows-2019
       python_versions: ["3.8", "3.9", "3.10", "3.11"]
       test_suites:
-        all:
-          venv\Scripts\pip install --upgrade-strategy eager --force-reinstall
-          --upgrade -e . &&  venv\Scripts\pytest -n 2 -vvs
+        all: |
+          venv\Scripts\pip install --upgrade-strategy eager --force-reinstall --upgrade -e .
+          venv\Scripts\pip freeze
+          venv\Scripts\pytest -n 2 -vvs
