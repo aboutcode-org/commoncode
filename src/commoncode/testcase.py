@@ -340,7 +340,11 @@ def get_test_file_pairs(test_dir, template_to_generate_missing_yaml=None):
                 dangling_test_files.add(test_file_path)
 
             if not path.exists(data_file_path):
-                dangling_data_files.add(data_file_path)
+                if template_to_generate_missing_yaml:
+                    with open(data_file_path, "w") as df:
+                        df.write(template_to_generate_missing_yaml)
+                else:
+                    dangling_data_files.add(data_file_path)
 
             paths_ignoring_case[file_path.lower()].append(file_path)
 
