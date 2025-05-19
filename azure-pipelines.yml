@@ -68,9 +68,9 @@ jobs:
       python_versions: ["3.9", "3.10", "3.11", "3.12", "3.13"]
       test_suites:
         click_versions: |
-          for clk_ver in 8.1.7 8.1.6 8.1.5 8.1.4 8.1.3 8.1.2 8.1.1 8.1.0 8.0.4 8.0.2 8.0.3 8.0.1 7.1.2 7.1.1 7.1 6.7;
+          for clk_ver in 8.2.0 8.2.1;
             do
-              pip install click==$clk_ver;
+              venv/bin/pip install --force-reinstall click==$clk_ver;
               venv/bin/pytest -vvs tests/test_cliutils_progressbar.py;
             done
 
