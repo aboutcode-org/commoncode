@@ -70,7 +70,8 @@ jobs:
         click_versions: |
           for clk_ver in 8.2.0 8.2.1;
             do
-              pip install click==$clk_ver;
+              venv/bin/pip uninstall -y click;
+              venv/bin/pip install --force-reinstall click==$clk_ver;
               venv/bin/pytest -vvs tests/test_cliutils_progressbar.py;
             done
 
