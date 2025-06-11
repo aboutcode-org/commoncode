@@ -30,4 +30,4 @@ jobs:
         run: make doc8
 
       - name: Check for Code style errors
-        run: make check-ci
+        run: make check
