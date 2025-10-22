@@ -126,7 +126,7 @@ if not exist "%CFG_BIN_DIR%\python.exe" (
             )
         )
         %PYTHON_EXECUTABLE% "%CFG_ROOT_DIR%\%VIRTUALENV_DIR%\virtualenv.pyz" ^
-            embed --pip embed --setuptools embed ^
+            --pip embed --setuptools embed ^
             --seeder pip ^
             --never-download ^
             --no-periodic-update ^
