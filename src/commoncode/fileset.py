@@ -194,5 +194,5 @@ def includes_excludes(patterns, message):
                 excluded[cpat] = message
             continue
         else:
-            included.add[pat] = message
+            included[pat] = message
     return included, excluded
