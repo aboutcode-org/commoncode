@@ -1,0 +1,212 @@
+Metadata-Version: 2.4
+Name: aboutcode-toolkit
+Version: 11.1.1
+Summary: AboutCode-toolkit is a tool to document the provenance (origin and license) of third-party software using small text files. Collect inventories and generate attribution documentation.
+Home-page: https://github.com/nexB/aboutcode-toolkit
+Author: nexB. Inc. and others
+Author-email: info@aboutcode.org
+License: Apache-2.0
+Keywords: license,about,metadata,package,copyright,attribution,software,inventory,open source,sca,SBOM,spdx
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: System :: Software Distribution
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Description-Content-Type: text/x-rst
+License-File: apache-2.0.LICENSE
+License-File: NOTICE
+License-File: AUTHORS.rst
+License-File: CHANGELOG.rst
+License-File: CODE_OF_CONDUCT.rst
+Requires-Dist: attrs
+Requires-Dist: boolean.py>=3.5
+Requires-Dist: certifi
+Requires-Dist: click
+Requires-Dist: jinja2
+Requires-Dist: license_expression>=0.94
+Requires-Dist: openpyxl
+Requires-Dist: packageurl_python>=0.9.0
+Requires-Dist: requests
+Requires-Dist: saneyaml
+Provides-Extra: testing
+Requires-Dist: pytest!=7.0.0,>=6; extra == "testing"
+Requires-Dist: pytest-xdist>=2; extra == "testing"
+Requires-Dist: twine; extra == "testing"
+Requires-Dist: black; extra == "testing"
+Requires-Dist: isort; extra == "testing"
+Provides-Extra: docs
+Requires-Dist: Sphinx>=5.0.2; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+Requires-Dist: sphinx-reredirects>=0.1.2; extra == "docs"
+Requires-Dist: doc8>=0.11.2; extra == "docs"
+Dynamic: license-file
+
+=================
+AboutCode Toolkit
+=================
+
+Introduction
+------------
+The AboutCode Toolkit and ABOUT files provide a simple way to document the
+origin, license, usage and other important or interesting information about
+third-party software components that you use in your project.
+
+You start by storing ABOUT files (a small YAML formatted text file with field/value pairs)
+side-by-side with each of the third-party software components you use.
+Each ABOUT file documents origin and license for one software.
+There are many examples of ABOUT files (valid or invalid) in the testdata/
+directory of the whole repository.
+
+The current version of the AboutCode Toolkit can read these ABOUT files so that you
+can collect and validate the inventory of third-party components that you use.
+
+In addition, this tool is able to generate attribution notices and
+identify redistributable source code used in your project to help you comply
+with open source licenses conditions.
+
+This version of the AboutCode Toolkit follows the ABOUT specification version 3.3.2 at:
+https://aboutcode-toolkit.readthedocs.io/en/latest/specification.html
+
+
+Build and tests status
+----------------------
+
++-------+-----------------+--------------+
+|Branch | **Linux/macOS** | **Windows**  |
++=======+=================+==============+
+|Master | |master-posix|  | |master-win| |
++-------+-----------------+--------------+
+|Develop| |devel-posix|   | |devel-win|  |
++-------+-----------------+--------------+
+
+
+REQUIREMENTS
+------------
+The AboutCode Toolkit is tested with Python 3.9 or above only on Linux, Mac and Windows.
+You will need to install a Python interpreter if you do not have one already
+installed.
+
+On Linux and Mac, Python is typically pre-installed. To verify which
+version may be pre-installed, open a terminal and type:
+
+    python --version
+
+Note
+~~~~
+    Debian has decided that distutils is not a core python package, so it is not included in the last versions of debian and debian-based OSes.
+    A solution is to run: `sudo apt install python3-distutils`
+
+On Windows or Mac, you can download the latest Python here:
+    https://www.python.org/downloads/
+
+Download the .msi installer for Windows or the .dmg archive for Mac.
+Open and run the installer using all the default options.
+
+INSTALLATION
+------------
+Checkout or download and extract the AboutCode Toolkit from:
+    https://github.com/nexB/aboutcode-toolkit/
+
+To install all the needed dependencies in a virtualenv, run (on posix):
+    ./configure
+or on windows:
+    configure
+
+ACTIVATE the VIRTUALENV
+-----------------------
+To activate the virtualenv, run (on posix):
+    source venv/bin/activate
+or on windows:
+    venv\\bin\\activate
+
+
+DEACTIVATE the VIRTUALENV
+-------------------------
+To deactivate the virtualenv, run (on both posix and windows):
+    deactivate
+
+
+VERSIONING SCHEMA
+-----------------
+Starting at AboutCode version 4.0.0, the AboutCode Toolkit will follow SemVer for the versioning schema.
+
+i.e. MAJOR.MINOR.PATCH format
+    1. MAJOR version when making incompatible API changes,
+    2. MINOR version when making functionality in a backwards compatible manner, and
+    3. PATCH version when making backwards compatible bug fixes.
+
+
+REFERENCE
+---------
+See https://aboutcode-toolkit.readthedocs.io/en/latest/ for documentation.
+
+See https://aboutcode-toolkit.readthedocs.io/en/latest/reference.html for reference.
+
+TESTS and DEVELOPMENT
+---------------------
+To install all the needed development dependencies, run (on posix):
+    ./configure --dev
+or on windows:
+    configure --dev
+
+To verify that everything works fine you can run the test suite with:
+    pytest
+
+
+CLEAN BUILD AND INSTALLED FILES
+-------------------------------
+To clean the built and installed files, run (on posix):
+    ./configure --clean
+or on windows:
+    configure --clean
+
+
+HELP and SUPPORT
+----------------
+If you have a question or find a bug, enter a ticket at:
+
+    https://github.com/nexB/aboutcode-toolkit
+
+For issues, you can use:
+
+    https://github.com/nexB/aboutcode-toolkit/issues
+
+
+SOURCE CODE
+-----------
+The AboutCode Toolkit is available through GitHub. For the latest version visit:
+    https://github.com/nexB/aboutcode-toolkit
+
+
+HACKING
+-------
+We accept pull requests provided under the same license as this tool.
+You agree to the http://developercertificate.org/
+
+
+LICENSE
+-------
+The AboutCode Toolkit is released under the Apache 2.0 license.
+See (of course) the about.ABOUT file for details.
+
+
+.. |master-posix| image:: https://api.travis-ci.org/nexB/aboutcode-toolkit.png?branch=master
+    :target: https://travis-ci.org/nexB/aboutcode-toolkit
+    :alt: Linux Master branch tests status
+.. |devel-posix| image:: https://api.travis-ci.org/nexB/aboutcode-toolkit.png?branch=develop
+    :target: https://travis-ci.org/nexB/aboutcode-toolkit
+    :alt: Linux Develop branch tests status
+
+.. |master-win| image:: https://ci.appveyor.com/api/projects/status/uwj2gh8i9ga1mqwn/branch/master?png=true
+    :target: https://ci.appveyor.com/project/nexB/aboutcode-toolkit
+    :alt: Windows Master branch tests status
+.. |devel-win| image:: https://ci.appveyor.com/api/projects/status/uwj2gh8i9ga1mqwn/branch/develop?png=true
+    :target: https://ci.appveyor.com/project/nexB/aboutcode-toolkit
+    :alt: Windows Develop branch tests status
