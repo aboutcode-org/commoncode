@@ -59,7 +59,7 @@ def time2tstamp(dt=None, path_safe=True):
     to convert back to a datetime object.
     """
     # TODO: check that the dt is effectively in UTC
-    datim = dt or datetime.now(timezone.utc)
+    datim = dt or datetime.now(timezone.utc).replace(tzinfo=None)
     iso = datim.isoformat()
     if path_safe:
         iso = iso.replace(":", "").replace("/", "_")
