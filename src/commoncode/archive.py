@@ -62,7 +62,10 @@ def extract_tar(location, target_dir, verbatim=False, filter=None, *args, **kwar
             if py314 and filter:
                 tar.extractall(target_dir, members=to_extract, filter=filter)
             else:
-                tar.extractall(target_dir, members=to_extract)
+                try:
+            tar.extractall(target_dir, members=to_extract, filter='data')
+        except TypeError:
+            tar.extractall(target_dir, members=to_extract)
         finally:
             if tar:
                 tar.close()

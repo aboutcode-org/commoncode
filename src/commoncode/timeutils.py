@@ -7,6 +7,7 @@
 #
 
 from datetime import datetime
+from datetime import timezone
 from datetime import tzinfo
 from functools import update_wrapper
 from functools import wraps
@@ -58,7 +59,7 @@ def time2tstamp(dt=None, path_safe=True):
     to convert back to a datetime object.
     """
     # TODO: check that the dt is effectively in UTC
-    datim = dt or datetime.utcnow()
+    datim = dt or datetime.now(timezone.utc)
     iso = datim.isoformat()
     if path_safe:
         iso = iso.replace(":", "").replace("/", "_")
