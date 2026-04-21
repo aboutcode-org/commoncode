@@ -194,9 +194,8 @@ class DebuggedProgressBar(CompatProgressBar):
     # overriden and copied from Click to work around Click woes for
     # https://github.com/aboutcode-org/scancode-toolkit/issues/2583
     def make_step(self, n_steps):
-        # always increment
-        self.pos += n_steps or 1
-        super(DebuggedProgressBar, self).make_step(n_steps)
+        # always increment even if n_steps is 0
+        super(DebuggedProgressBar, self).make_step(n_steps or 1)
 
     # overriden and copied from Click to work around Click woes for
     # https://github.com/aboutcode-org/scancode-toolkit/issues/2583
