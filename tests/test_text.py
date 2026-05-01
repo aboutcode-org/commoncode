@@ -7,6 +7,8 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import pytest
+
 from commoncode import text
 from commoncode.text import CR
 from commoncode.text import LF
@@ -85,12 +87,11 @@ def test_python_safe_name():
     assert text.python_safe_name(s2) == text.python_safe_name(s1)
 
 
+
 def test_as_unicode():
     assert text.as_unicode("") == ""
     assert isinstance(text.as_unicode(b"some bytes"), str)
-    assert text.as_unicode(None) == None
-    try:
+    assert text.as_unicode(None) is None
+
+    with pytest.raises(TypeError):
         text.as_unicode(["foo"])
-        raise Exception("Exception should have been raised")
-    except AssertionError:
-        pass

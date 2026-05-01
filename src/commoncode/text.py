@@ -142,5 +142,6 @@ def as_unicode(s):
         return ""
     if not s:
         return s
-    assert isinstance(s, bytes), "s must be bytes but is: {}".format(s)
+    if not isinstance(s, bytes):
+        raise TypeError(f"s must be bytes, not {type(s).__name__}")
     return UnicodeDammit(s).unicode_markup
