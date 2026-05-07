@@ -92,5 +92,5 @@ def test_as_unicode():
     try:
         text.as_unicode(["foo"])
         raise Exception("Exception should have been raised")
-    except AssertionError:
+    except TypeError:
         pass
