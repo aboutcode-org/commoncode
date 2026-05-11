@@ -58,7 +58,8 @@ def execute(cmd_loc, args, cwd=None, env=None, to_files=False, log=TRACE):
     Run the command using the `cwd` current working directory with an `env` dict
     of environment variables.
     """
-    assert cmd_loc
+    if not cmd_loc:
+        raise FileNotFoundError(f"Unable to find command: {cmd}")
     full_cmd = [cmd_loc] + (args or [])
 
     # any shared object should be either in the PATH, the rpath or
