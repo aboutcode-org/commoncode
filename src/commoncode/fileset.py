@@ -119,7 +119,9 @@ def get_matches(path, patterns, all_matches=False):
 
     matches = []
     if not isinstance(patterns, dict):
-        assert isinstance(patterns, (list, tuple)), "Invalid patterns: {}".format(patterns)
+        if not isinstance(patterns, (list, tuple)):
+            raise TypeError("Invalid patterns: {}".format(patterns))
+
         patterns = {p: p for p in patterns}
 
     for pat, value in patterns.items():
@@ -158,7 +160,8 @@ def load(location):
         return tuple()
     fn = os.path.abspath(os.path.normpath(os.path.expanduser(location)))
     msg = ("File %(location)s does not exist or not a file.") % locals()
-    assert os.path.exists(fn) and os.path.isfile(fn), msg
+    if not os.path.exists(fn) or not os.path.isfile(fn):
+         raise FileNotFoundError(msg)
     mode = "r"
     with open(fn, mode) as f:
         return [line.strip() for line in f if line and line.strip()]
