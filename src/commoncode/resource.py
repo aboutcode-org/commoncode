@@ -284,7 +284,8 @@ class Codebase:
         location = abspath(normpath(expanduser(location)))
         location = location.rstrip("/\\")
         # TODO: what if is_special(location)???
-        assert exists(location)
+        if not exists(location):
+             raise FileNotFoundError(location)
         self.location = location
 
         self.is_file = filetype_is_file(location)
@@ -765,7 +766,8 @@ class Codebase:
         The ``path`` must be relative to the root (and including the root
         name as its first segment).
         """
-        assert isinstance(path, str), f"Invalid path: {path!r} is not a string."
+        if not isinstance(path, str):
+            raise TypeError(f"Invalid path: {path!r} is not a string.")
         path = clean_path(path)
         if TRACE:
             msg = ["  Codebase.get_resource:", "path:", path]
@@ -1186,7 +1188,8 @@ class Resource(object):
         """
         root_loc = clean_path(root_location)
         loc = clean_path(location)
-        assert loc.startswith(root_loc)
+        if not loc.startswith(root_loc):
+            raise ValueError(f"Location {loc!r} is not under root location {root_loc!r}.")
 
         # keep the root directory name by default
         root_loc = posixpath_parent(root_loc).strip("/")
@@ -2101,7 +2104,8 @@ def get_ancestor_paths(path, include_self=False):
     >>> results = list(get_ancestor_paths('foo', include_self=False))
     >>> assert results == [], results
     """
-    assert path
+    if not path:
+         raise ValueError("path cannot be empty")
     segments = path.split("/")
     if not include_self:
         segments = segments[:-1]
