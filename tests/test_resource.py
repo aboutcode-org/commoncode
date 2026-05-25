@@ -101,6 +101,19 @@ class TestCodebase(FileBasedTesting):
         ]
         assert [(r.name, r.is_file) for r in results] == expected
 
+    def test_remove_resource_without_parent(self):
+        test_codebase = self.get_test_loc("resource/codebase")
+        codebase = Codebase(test_codebase)
+        resource = codebase.get_resource("codebase/dir/that")
+        parent = resource.parent(codebase)
+
+        codebase.resources_by_path.pop(parent.path)
+
+        removed_paths = codebase.remove_resource(resource)
+
+        assert removed_paths == {resource.location}
+        assert resource.path not in codebase.resources_by_path
+
     def test_walk_filtered_with_filtered_root(self):
         test_codebase = self.get_test_loc("resource/codebase")
         codebase = Codebase(test_codebase)
