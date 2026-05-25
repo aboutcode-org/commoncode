@@ -906,8 +906,9 @@ class Codebase:
         parent = resource.parent(self)
         if TRACE:
             logger_debug("    parent", parent)
-        parent.children_names.remove(resource.name)
-        parent.save(self)
+        if parent:
+            parent.children_names.remove(resource.name)
+            parent.save(self)
 
         # remove resource proper
         self._remove_resource(resource)
