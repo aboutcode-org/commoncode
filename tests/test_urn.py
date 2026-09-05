@@ -140,3 +140,11 @@ class URNTestCase(unittest.TestCase):
         encoded = "urn:dje:component:SIP+Servlets+%28MSS%29:v+1.4.0.FINAL"
         assert urn.encode(object_type, **fields) == encoded
         assert urn.decode(encoded) == (object_type, fields)
+
+
+class TruncatedURNTestCase(unittest.TestCase):
+    def test_truncated_urns_raise_validation_error(self):
+        for value in ("", "urn", "urn:", "urn:dje"):
+            with self.subTest(value=value):
+                with self.assertRaises(urn.URNValidationError):
+                    urn.decode(value)

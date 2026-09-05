@@ -125,6 +125,9 @@ def decode(urn):
     """
     segments = [unquote_plus(p) for p in urn.split(":")]
 
+    if len(segments) < 3:
+        raise URNValidationError("Invalid URN: missing namespace or object type.")
+
     if not segments[0] == ("urn"):
         raise URNValidationError("Invalid URN prefix. Expected 'urn'.")
 
