@@ -148,3 +148,9 @@ class TruncatedURNTestCase(unittest.TestCase):
             with self.subTest(value=value):
                 with self.assertRaises(urn.URNValidationError):
                     urn.decode(value)
+
+
+class InvalidPrefixTestCase(unittest.TestCase):
+    def test_short_non_urn_keeps_prefix_error(self):
+        with self.assertRaisesRegex(urn.URNValidationError, "Invalid URN prefix"):
+            urn.decode("x")
