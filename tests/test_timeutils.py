@@ -193,7 +193,6 @@ class TestTimeStamp(FileBasedTesting):
     def test_tstamp2time_raise(self):
         self.assertRaises(ValueError, tstamp2time, "201011A12T13:14:15Z")
 
-
     def test_tstamp2time_scales_fractional_seconds(self):
         for fraction, expected in (
             ("1", 100000),
