@@ -192,3 +192,18 @@ class TestTimeStamp(FileBasedTesting):
 
     def test_tstamp2time_raise(self):
         self.assertRaises(ValueError, tstamp2time, "201011A12T13:14:15Z")
+
+
+    def test_tstamp2time_scales_fractional_seconds(self):
+        for fraction, expected in (
+            ("1", 100000),
+            ("12", 120000),
+            ("123", 123000),
+            ("001", 1000),
+            ("123456", 123456),
+            ("1234567", 123456),
+        ):
+            for prefix in ("2010-11-12T13:14:15", "20101112T131415"):
+                with self.subTest(fraction=fraction, prefix=prefix):
+                    result = tstamp2time(f"{prefix}.{fraction}Z")
+                    assert result.microsecond == expected

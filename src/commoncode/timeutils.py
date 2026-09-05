@@ -86,7 +86,7 @@ def tstamp2time(stamp):
     except Exception:
         microsec = None
     if microsec:
-        microsec = int(microsec)
+        microsec = int(microsec.ljust(6, "0")[:6])
         if 0 <= microsec <= 999999:
             datim = datim.replace(microsecond=microsec)
     return datim
