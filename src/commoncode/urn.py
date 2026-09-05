@@ -128,6 +128,9 @@ def decode(urn):
     if not segments[0] == ("urn"):
         raise URNValidationError("Invalid URN prefix. Expected 'urn'.")
 
+    if len(segments) < 3:
+        raise URNValidationError("Invalid URN: missing namespace or object type.")
+
     if not segments[1] == ("dje"):
         raise URNValidationError("Invalid URN namespace. Expected 'dje'.")
 
