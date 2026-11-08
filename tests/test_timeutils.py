@@ -6,7 +6,9 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import warnings
 from datetime import datetime
+from datetime import timezone
 
 from commoncode.testcase import FileBasedTesting
 from commoncode.timeutils import UTC
@@ -34,10 +36,22 @@ class TestTimeStamp(FileBasedTesting):
         self.assertRaises(AttributeError, time2tstamp, 1)
 
     def test_time2tstamp_tstamp2time_is_idempotent(self):
-        dt = datetime.utcnow()
+        dt = datetime.now(timezone.utc).replace(tzinfo=None)
         ts = time2tstamp(dt)
         dt_from_ts = tstamp2time(ts)
         assert dt_from_ts == dt
+
+    def test_time2tstamp_does_not_emit_deprecation_warnings(self):
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            time2tstamp()
+
+        utcnow_warnings = [
+            str(warning.message)
+            for warning in caught
+            if issubclass(warning.category, DeprecationWarning) and "utcnow" in str(warning.message)
+        ]
+        assert not utcnow_warnings
 
     def test_tstamp2time_format(self):
         import re

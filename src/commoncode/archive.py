@@ -14,11 +14,28 @@ from functools import partial
 from os import path
 
 from commoncode.system import on_windows
-from commoncode.system import py314
 
 """
 Mimimal tar and zip file handling, primarily for testing.
 """
+
+
+def _extractall(tar, target_dir, members=None, filter=None):
+    """
+    Extract `members` from `tar` in `target_dir`.
+
+    Always pass an explicit ``filter`` to ``tarfile.extractall()`` when this
+    is supported. Python 3.12 deprecated extracting without a filter and
+    Python 3.14 changes the default to ``data``, which would silently drop
+    permissions, owners, links and other metadata. Using ``fully_trusted``
+    keeps the historical behavior unless a caller requests another filter.
+    """
+    filter = filter or "fully_trusted"
+    try:
+        tar.extractall(target_dir, members=members, filter=filter)
+    except TypeError:
+        # Python versions that do not support the ``filter`` argument
+        tar.extractall(target_dir, members=members)
 
 
 def _extract_tar_raw(test_path, target_dir, to_bytes, *args, **kwargs):
@@ -29,7 +46,7 @@ def _extract_tar_raw(test_path, target_dir, to_bytes, *args, **kwargs):
     tar = None
     try:
         tar = tarfile.open(test_path)
-        tar.extractall(path=target_dir)
+        _extractall(tar, target_dir)
     finally:
         if tar:
             tar.close()
@@ -59,10 +76,7 @@ def extract_tar(location, target_dir, verbatim=False, filter=None, *args, **kwar
                     if not verbatim:
                         tarinfo.mode = 0o755
                     to_extract.append(tarinfo)
-            if py314 and filter:
-                tar.extractall(target_dir, members=to_extract, filter=filter)
-            else:
-                tar.extractall(target_dir, members=to_extract)
+            _extractall(tar, target_dir, members=to_extract, filter=filter)
         finally:
             if tar:
                 tar.close()
