@@ -550,8 +550,8 @@ def _validate_option_dependencies(ctx, param, value, other_option_names, require
         return
 
     def _is_set(_value, _param):
-        if _param.type in (bool, BoolParamType):
-            return _value
+        if _param.type is bool or isinstance(_param.type, BoolParamType):
+            return bool(_value)
 
         if _param.multiple:
             empty = (_value and len(_value) == 0) or not _value
